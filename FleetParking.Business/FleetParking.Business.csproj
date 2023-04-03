@@ -4,10 +4,20 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>188e2cbe-2657-4bdc-bf11-c3dfc1705df2</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Storage\Entities\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.4" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Storage\Entities\AssignedParkingRights\" />
+    <Folder Include="Storage\Entities\AccessDevices\" />
+    <Folder Include="Storage\Entities\ParkingRights\" />
+    <Folder Include="Storage\Entities\Shared\" />
+    <Folder Include="Storage\Configurations\" />
   </ItemGroup>
 
 </Project>
