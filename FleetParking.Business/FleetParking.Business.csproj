@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\" />
     <Folder Include="Storage\Entities\AssignedParkingRights\" />
     <Folder Include="Storage\Entities\AccessDevices\" />
     <Folder Include="Storage\Entities\ParkingRights\" />

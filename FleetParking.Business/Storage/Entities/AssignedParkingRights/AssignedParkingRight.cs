@@ -26,4 +26,10 @@ public sealed class AssignedParkingRight
             ParkerId = parkerId,
             Status = AssignedParkingRightStatus.Pending
         };
+
+    public void Revoke()
+        => Status = AssignedParkingRightStatus.Revoked;
+
+    public void Accept()
+        => Status = AssignedParkingRightStatus.Accepted;
 }

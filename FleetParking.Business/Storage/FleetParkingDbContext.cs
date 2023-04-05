@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace FleetParking.Business.Storage;
 
-public sealed class FleetParkingDbContext : DbContext
+internal sealed class FleetParkingDbContext : DbContext, IFleetParkingDbContext
 {
     private readonly IConfiguration _configuration;
 
@@ -27,7 +27,6 @@ public sealed class FleetParkingDbContext : DbContext
         builder.UseNpgsql(_configuration.GetConnectionString("FleetParking") , context =>
         {
             context.MigrationsAssembly(BusinessAssembly.Instance.GetName().Name);
-
         });
     }
 

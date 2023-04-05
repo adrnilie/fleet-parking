@@ -20,4 +20,8 @@
     <ProjectReference Include="..\FleetParking.Business\FleetParking.Business.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\Request\" />
+  </ItemGroup>
+
 </Project>

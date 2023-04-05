@@ -19,9 +19,11 @@ public sealed class Parker
 
     public EmailAddress EmailAddress { get; private set; }
 
-    public OwnerId OwnerId { get; set; }
+    public OwnerId OwnerId { get; private set; }
 
-    public bool Deleted { get; set; }
+    public bool Deleted { get; private set; }
+
+    public bool EmailConfirmed { get; private set; }
 
     public IReadOnlyCollection<AssignedParkingRight> AssignedParkingRights => _assignedParkingRights.ToList();
 
@@ -45,6 +47,16 @@ public sealed class Parker
 
     public void Delete()
     {
+        foreach (var assignedParkingRight in _assignedParkingRights)
+        {
+            assignedParkingRight.Revoke();
+        }
+
         Deleted = true;
     }
- }
+
+    public void ConfirmEmail()
+    {
+        EmailConfirmed = true;
+    }
+}

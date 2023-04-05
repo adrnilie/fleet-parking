@@ -10,7 +10,7 @@ public sealed class ParkingRight
 
     private ParkingRight()
     {
-        
+
     }
 
     public ParkingRightId Id { get; private set; }
@@ -27,4 +27,9 @@ public sealed class ParkingRight
             OwnerId = ownerId,
             StartDate = DateTime.UtcNow,
         };
+
+    public bool IsAvailable
+        => !_assignedParkingRights.Any() ||
+           _assignedParkingRights.Any(apr => apr.ParkingRightId == Id &&
+                                             apr.Status == AssignedParkingRightStatus.Revoked);
 }

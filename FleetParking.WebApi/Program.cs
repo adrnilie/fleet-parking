@@ -1,5 +1,5 @@
+using FleetParking.Business;
 using System.Reflection;
-using FleetParking.Business.Storage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,7 @@ builder.Configuration
 
 // Add services to the container.
 builder.Services
-    .AddDbContext<FleetParkingDbContext>();
+    .AddFleetParkingCore();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
