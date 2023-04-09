@@ -3,6 +3,7 @@ using System;
 using FleetParking.Business.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FleetParking.Business.Migrations
 {
     [DbContext(typeof(FleetParkingDbContext))]
-    partial class FleetParkingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230408175802_OutboxMessages_Initialize")]
+    partial class OutboxMessages_Initialize
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -9,8 +9,8 @@ namespace FleetParking.Business.Services;
 
 public interface IFleetParkingService
 {
-    Task<Parker> LoadOrCreate(OwnerId ownerId, EmailAddress emailAddress, string name = "");
-    Task<ParkingRight?> GetAvailableParkingRight(OwnerId ownerId);
+    //Task<Parker> LoadOrCreate(OwnerId ownerId, EmailAddress emailAddress, string name = "");
+    //Task<ParkingRight?> GetAvailableParkingRight(OwnerId ownerId);
     Task<bool> AssignParkingRight(OwnerId ownerId, EmailAddress emailAddress, string name = "");
     Task<bool> AcceptInvitation(OwnerId ownerId, ParkerId parkerId);
     Task<bool> RevokeParkingRights(OwnerId ownerId, ParkerId parkerId, params ParkingRightId[] parkingRightIds);
@@ -26,7 +26,7 @@ internal sealed class FleetParkingService : IFleetParkingService
         _context = context;
     }
 
-    public async Task<Parker> LoadOrCreate(OwnerId ownerId, EmailAddress emailAddress, string name = "")
+    private async Task<Parker> LoadOrCreate(OwnerId ownerId, EmailAddress emailAddress, string name = "")
     {
         var parker = await _context.Parkers
             .FirstOrDefaultAsync(p =>
@@ -45,7 +45,7 @@ internal sealed class FleetParkingService : IFleetParkingService
         return parker;
     }
 
-    public async Task<ParkingRight?> GetAvailableParkingRight(OwnerId ownerId)
+    private async Task<ParkingRight?> GetAvailableParkingRight(OwnerId ownerId)
     {
         var parkingRights = await _context
             .ParkingRights
@@ -100,13 +100,7 @@ internal sealed class FleetParkingService : IFleetParkingService
             return false;
         }
 
-        parker.ConfirmEmail();
-
-        foreach (var assignedParkingRight in parker.AssignedParkingRights)
-        {
-            assignedParkingRight.Accept();
-        }
-
+        parker.AcceptInvitation();
         await _context.SaveChangesAsync();
 
         return true;
@@ -135,11 +129,7 @@ internal sealed class FleetParkingService : IFleetParkingService
             return false;
         }
 
-        foreach (var assignedParkingRight in parker.AssignedParkingRights)
-        {
-            assignedParkingRight.Revoke();
-        }
-
+        parker.RevokeParkingRights();
         await _context.SaveChangesAsync();
 
         return true;
